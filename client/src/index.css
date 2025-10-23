@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Title */
+@theme {
+  --color-light-title: #111111;
+  --color-dark-title: #F2EAD3;
+}
+
+/* Dark */
+@theme {
+  --color-dark-primary: #222222;
+  --color-dark-primary-dull: #111111;
+  --color-dark-text: #F2EAD3;
+  --color-dark-button: #1c2541;
+}
+
+/* Light */
+@theme {
+  --color-light-primary: #f5f0e6;
+  --color-light-primary-dull: #F2EAD3;
+  --color-light-text: #d5d5d5;
+  --color-light-text-dull: #1b1b1c;
+  --color-light-button: #1b1b1c;
+}
+
+/* Hover */
+@theme {
+  --color-light-hover: #3a506b;
+  --color-dark-hover: #333631;
+}
+
+/* Form Card */
+@theme {
+  --color-light-bg-form: #e0c392;
+  --color-dark-bg-form: #081d2b;
+  --color-hover-light: #e9e1c9;
+  --color-hover-dark: #293655;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+* {
+  font-family: "Outfit", sans-serif;
+  scrollbar-width: thin;
+  scrollbar-color: #787777 #1e1e1e;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
