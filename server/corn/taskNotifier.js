@@ -1,3 +1,4 @@
+// cron/taskNotifier.js
 const cron = require("node-cron");
 const Task = require("../models/Task.js");
 const sendEmail = require("../utils/emailService.js");
@@ -15,14 +16,17 @@ const checkTasks = async () => {
     const allTasks = await Task.find().populate("user", "email name");
 
     for (const task of allTasks) {
-      if (!task.user || !task.dueDate) continue;
+      if (!task.user || !task.dueDate || task.status === "Completed") continue;
 
       const dueDate = new Date(task.dueDate);
       const email = task.user.email;
       const dashboardLink = "https://fortask.netlify.app";
 
-      // Reminder for tasks due tomorrow
-      if (dueDate.toDateString() === tomorrow.toDateString()) {
+      // Reminder for tasks due tomorrow (send only once)
+      if (
+        dueDate.toDateString() === tomorrow.toDateString() &&
+        !task.lastReminderSent
+      ) {
         await sendEmail(
           email,
           `Upcoming Task Reminder: ${task.title}`,
@@ -33,10 +37,14 @@ const checkTasks = async () => {
             dashboardLink
           )
         );
+
+        // Mark reminder as sent
+        task.lastReminderSent = new Date();
+        await task.save();
       }
 
       // Alert for overdue tasks
-      if (dueDate < now && task.status !== "Completed") {
+      if (dueDate < now) {
         await sendEmail(
           email,
           `Overdue Task Alert: ${task.title}`,

@@ -5,7 +5,7 @@ const resend = new Resend(process.env.RESEND_API_KEY)
 
 const sendEmail = async (to, subject, html) => {
     try {
-        await resend.emails.sendMail({
+        await resend.emails.send({
             from: `"Task Manager" <${process.env.EMAIL_USER}>`,
             to,
             subject,
