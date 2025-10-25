@@ -1,10 +1,13 @@
 import { createContext, useEffect, useState } from "react";
-import { API } from "../api.js";
+import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
+import { API } from "../api.js";
 
 export const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
+  const navigate = useNavigate();
+
   const [user, setUser] = useState(() => {
     const s = localStorage.getItem("user");
     return s ? JSON.parse(s) : null;
@@ -18,6 +21,7 @@ export const AppProvider = ({ children }) => {
     if (stored !== null) return stored === "true";
     return window.matchMedia("(prefers-color-scheme: dark)").matches;
   });
+
   const [hideSignupButton, setHideSignupButton] = useState(false);
 
   useEffect(() => {
@@ -31,11 +35,12 @@ export const AppProvider = ({ children }) => {
     else localStorage.removeItem("token");
   }, [token]);
 
+  //Login API
   const login = async (credentials) => {
     try {
       const { data } = await API.post("/auth/login", credentials);
-      setUser(data.user);
-      setToken(data.token);
+      setUser(data?.user);
+      setToken(data?.token);
       localStorage.setItem("user", JSON.stringify(data.user));
       toast.success("Logged in successfully");
       return true;
@@ -45,6 +50,7 @@ export const AppProvider = ({ children }) => {
     }
   };
 
+  //Signup API
   const signup = async (payload) => {
     try {
       const { data } = await API.post("/auth/signup", payload);
@@ -66,33 +72,32 @@ export const AppProvider = ({ children }) => {
 
   //Tasks
 
-  //fetch task
+  //fetch task API
   const fetchTasks = async (filters = {}) => {
-  setLoading(true); // show loading
+    setLoading(true); // show loading
 
-  try {
-    // create query string if filters exist
-    const query = Object.keys(filters).length
-      ? "?" + new URLSearchParams(filters).toString()
-      : "";
+    try {
+      // create query string if filters exist
+      const query = Object.keys(filters).length
+        ? "?" + new URLSearchParams(filters).toString()
+        : "";
 
-    // fetch tasks from API
-    const response = await API.get(`/task/get-tasks${query}`);
+      // fetch tasks from API
+      const response = await API.get(`/task/get-tasks${query}`);
 
-    // ensure tasks is always an array
-    setTasks(Array.isArray(response.data.tasks) ? response.data.tasks : []);
+      // ensure tasks is always an array
+      setTasks(Array.isArray(response.data?.tasks) ? response.data?.tasks : []);
 
-    setLoading(false);
-    return response.data;
-  } catch (error) {
-    setLoading(false);
-    toast.error("Failed to load tasks");
-    return [];
-  }
-};
+      setLoading(false);
+      return response?.data;
+    } catch (error) {
+      setLoading(false);
+      toast.error("Failed to load tasks");
+      return [];
+    }
+  };
 
-
-  //   create task
+  //create task API
   const createTask = async (payload) => {
     try {
       const { data } = await API.post("/task/create-task", payload);
@@ -105,7 +110,7 @@ export const AppProvider = ({ children }) => {
     }
   };
 
-  //   update task
+  //update task API
   const updateTask = async (id, payload) => {
     try {
       const { data } = await API.put(`/task/update-task/${id}`, payload);
@@ -118,7 +123,7 @@ export const AppProvider = ({ children }) => {
     }
   };
 
-  //   delete task
+  //delete task API
   const deleteTask = async (id) => {
     try {
       await API.delete(`/task/delete-task/${id}`);
@@ -129,7 +134,7 @@ export const AppProvider = ({ children }) => {
     }
   };
 
-  //Reorder after drag and drop (persisting order to backend optional)
+  //Reorder after drag and drop (persisting order to backend optional) API
   const reorderTask = async (sourceIdx, destIdx) => {
     const items = Array.from(tasks);
     const [moved] = items.splice(sourceIdx, 1);

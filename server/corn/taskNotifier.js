@@ -19,7 +19,7 @@ const checkTasks = async () => {
 
       const dueDate = new Date(task.dueDate);
       const email = task.user.email;
-      const dashboardLink = "http://localhost:5173/";
+      const dashboardLink = "https://fortask.netlify.app";
 
       // Reminder for tasks due tomorrow
       if (dueDate.toDateString() === tomorrow.toDateString()) {

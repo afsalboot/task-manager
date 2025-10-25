@@ -61,7 +61,7 @@ const TaskCard = ({ task }) => {
 
   // Status styles + icons
   const statusInfo = {
-    Pending: { color: "bg-ending-status text-text-statusp", icon: <Clock size={12} /> },
+    Pending: { color: "bg-pending-status text-text-status", icon: <Clock size={12} /> },
     "In Progress": { color: "bg-inprogress-status text-text-status", icon: <Play size={12} /> },
     Completed: { color: "bg-complete-status text-text-status", icon: <Check size={12} /> },
   };

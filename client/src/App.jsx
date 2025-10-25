@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { BrowserRouter, Route, Routes } from "react-router";
+import React from "react";
+import { Route, Routes } from "react-router";
 import Dashboard from "./pages/Dashboard.jsx";
 import Layout from "./components/Layout.jsx";
 import Login from "./pages/Login.jsx";
@@ -10,17 +10,15 @@ import Profile from "./pages/Profile.jsx";
 const App = () => {
   return (
     <div className="min-h-screen">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Dashboard />} />
-            <Route path="/login" element={<Login/>}/>
-            <Route path="/signup" element={<Signup/>}/>
-            <Route path="/add-task" element={<TaskForm/>}/>
-            <Route path="/profile" element={<Profile/>}/>
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Dashboard />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/add-task" element={<TaskForm />} />
+          <Route path="/profile" element={<Profile />} />
+        </Route>
+      </Routes>
     </div>
   );
 };

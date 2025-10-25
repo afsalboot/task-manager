@@ -1,46 +1,50 @@
+/* Import Fonts & Tailwind */
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 @import "tailwindcss";
 
+/* Dark Mode Variant */
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Title */
+
+/* Colors */
+
+
+/* Titles */
 @theme {
   --color-light-title: #111111;
   --color-dark-title: #F2EAD3;
 }
+/* Loader */
+@theme {
+  --color-light-loader: #6B7280;
+  --color-dark-loader: #E5E7EB;
+}
 
-/* Dark */
+/* Dark Theme */
 @theme {
   --color-dark-primary: #222222;
   --color-dark-primary-dull: #111111;
   --color-dark-text: #F2EAD3;
   --color-dark-button: #1c2541;
+  --color-dark-hover: #333631;
+  --color-dark-bg-form: #081d2b;
+  --color-hover-dark: #293655;
 }
 
-/* Light */
+/* Light Theme */
 @theme {
   --color-light-primary: #f5f0e6;
   --color-light-primary-dull: #F2EAD3;
   --color-light-text: #d5d5d5;
   --color-light-text-dull: #1b1b1c;
   --color-light-button: #1b1b1c;
-}
-
-/* Hover */
-@theme {
+  --color-light-bg: #e0c392;
   --color-light-hover: #3a506b;
-  --color-dark-hover: #333631;
-}
-
-/* Form Card */
-@theme {
   --color-light-bg-form: #e0c392;
-  --color-dark-bg-form: #081d2b;
   --color-hover-light: #e9e1c9;
-  --color-hover-dark: #293655;
 }
 
-/* Status */
+/* Task Status Colors */
 @theme {
   --color-pending-status: #f87171;
   --color-inprogress-status: #facc15;
@@ -48,26 +52,43 @@
   --color-text-status: #1b1b1c;
 }
 
+
+/* Global Styles */
+
 body {
-  padding: 0;
   margin: 0;
-}
-
-* {
+  padding: 0;
   font-family: "Outfit", sans-serif;
-  scrollbar-width: thin;
-  scrollbar-color: #787777 #1e1e1e;
 }
 
-.no-scrollbar {
+/* Hide Scrollbar */
+* {
   scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Remove default number input spinners */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
 
-::-webkit-calendar-picker-indicator {
+/* Date Picker Styles */
+input[type="date"]::-webkit-calendar-picker-indicator {
   filter: invert(1);
+  opacity: 0.8;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
+svg {
+  stroke: currentColor;
 }
