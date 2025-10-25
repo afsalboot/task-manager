@@ -2,10 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import { GripVertical, ListTodo, PieChart, PlusSquare } from "lucide-react";
 import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 import { ResponsivePie } from "@nivo/pie";
-import { AppContext } from "../context/AppContext";
 import { useNavigate } from "react-router";
-import TaskCard from "../components/TaskCard";
 import toast from "react-hot-toast";
+import { AppContext } from "../context/AppContext.jsx";
+import TaskCard from "../components/TaskCard.jsx";
 
 const COLORS = ["#4ade80", "#facc15", "#f87171"];
 

@@ -1,3 +1,4 @@
+//Email Template
 exports.taskReminderTemplate = (userName, taskTitle, dueDate, link) => `
   <div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 20px;">
     <div style="max-width: 600px; margin: auto; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">

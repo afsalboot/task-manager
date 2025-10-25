@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
-import { AppContext } from "../context/AppContext";
 import { Check, Clock, Edit, Play, Save, Trash2 } from "lucide-react";
+import { AppContext } from "../context/AppContext.jsx";
 
 const TaskCard = ({ task }) => {
   const { updateTask, deleteTask } = useContext(AppContext);

@@ -1,5 +1,5 @@
-const User = require("../models/User.js");
 const argon = require("argon2");
+const User = require("../models/User.js");
 const { generateToken } = require("../utils/generateToken.js");
 
 //Register a new user

@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { AppContext } from "../context/AppContext";
 import { CheckCircle, Clock, ListTodo, Loader, Activity, ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router";
-import ProgressBar from "../components/ProgressBar";
+import { AppContext } from "../context/AppContext.jsx";
+import ProgressBar from "../components/ProgressBar.jsx";
 
 const Profile = () => {
   const { user, stats, loading } = useContext(AppContext);

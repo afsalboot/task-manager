@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { BrowserRouter, Route, Routes } from "react-router";
-import Dashboard from "./pages/Dashboard";
-import Layout from "./components/Layout";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
-import TaskForm from "./pages/TaskForm";
-import Profile from "./pages/Profile";
+import Dashboard from "./pages/Dashboard.jsx";
+import Layout from "./components/Layout.jsx";
+import Login from "./pages/Login.jsx";
+import Signup from "./pages/Signup.jsx";
+import TaskForm from "./pages/TaskForm.jsx";
+import Profile from "./pages/Profile.jsx";
 
 const App = () => {
   return (

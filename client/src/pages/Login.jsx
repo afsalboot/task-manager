@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
-import { AppContext } from "../context/AppContext";
+import { AppContext } from "../context/AppContext.jsx";
 import { useNavigate,Link } from "react-router";
 
 const LoginSchema = Yup.object({

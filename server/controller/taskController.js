@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Task = require("../models/Task");
+const Task = require("../models/Task.js");
 
 // Create a new task
 const createTask = async (req, res) => {

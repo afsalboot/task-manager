@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { AppContext } from "../context/AppContext";
+import { AppContext } from "../context/AppContext.jsx";
 import { Link } from "react-router";
 import { LogOut, Moon, Sun, User } from "lucide-react";
 

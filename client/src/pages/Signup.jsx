@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import { AppContext } from "../context/AppContext";
 import { useNavigate, Link } from "react-router";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { AppContext } from "../context/AppContext.jsx";
 
 const Signup = () => {
   const { signup, setHideSignupButton  } = useContext(AppContext);
