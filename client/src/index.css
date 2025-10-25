@@ -40,6 +40,14 @@
   --color-hover-dark: #293655;
 }
 
+/* Status */
+@theme {
+  --color-pending-status: #f87171;
+  --color-inprogress-status: #facc15;
+  --color-complete-status: #4ade80;
+  --color-text-status: #1b1b1c;
+}
+
 body {
   padding: 0;
   margin: 0;

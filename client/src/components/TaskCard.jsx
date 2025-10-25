@@ -8,8 +8,6 @@ const TaskCard = ({ task }) => {
   const [title, setTitle] = useState(task.title);
   const [description, setDescription] = useState(task.description || "");
 
-  console.log(task);
-
   // Cycle status: Pending → In Progress → Completed → Pending
   const cycleStatus = async () => {
     const nextStatus =
@@ -63,9 +61,9 @@ const TaskCard = ({ task }) => {
 
   // Status styles + icons
   const statusInfo = {
-    Pending: { color: "bg-gray-300 text-gray-500", icon: <Clock size={12} /> },
-    "In Progress": { color: "bg-yellow-400", icon: <Play size={12} /> },
-    Completed: { color: "bg-green-500", icon: <Check size={12} /> },
+    Pending: { color: "bg-ending-status text-text-statusp", icon: <Clock size={12} /> },
+    "In Progress": { color: "bg-inprogress-status text-text-status", icon: <Play size={12} /> },
+    Completed: { color: "bg-complete-status text-text-status", icon: <Check size={12} /> },
   };
 
   // Priority badge color
@@ -102,7 +100,7 @@ const TaskCard = ({ task }) => {
                   type="text"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  className="border p-1 rounded-md mb-2 dark:bg-dark-primary dark:text-light-text"
+                  className="border p-1 rounded-md mb-2 bg-light-primary dark:bg-dark-primary text-light-text-dull dark:text-dark-text "
                 />
                 <textarea
                   value={description}
@@ -118,7 +116,7 @@ const TaskCard = ({ task }) => {
                   className={`text-lg font-semibold ${
                     task.status === "Completed"
                       ? "line-through text-gray-400"
-                      : "text-light-text dark:text-dark-text"
+                      : "text-light-text-dull dark:text-dark-text"
                   }`}
                 >
                   {task.title}

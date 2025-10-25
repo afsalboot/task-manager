@@ -5,6 +5,7 @@ import Layout from "./components/Layout";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import TaskForm from "./pages/TaskForm";
+import Profile from "./pages/Profile";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
             <Route path="/login" element={<Login/>}/>
             <Route path="/signup" element={<Signup/>}/>
             <Route path="/add-task" element={<TaskForm/>}/>
+            <Route path="/profile" element={<Profile/>}/>
           </Route>
         </Routes>
       </BrowserRouter>

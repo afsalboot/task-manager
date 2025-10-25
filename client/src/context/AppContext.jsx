@@ -38,6 +38,7 @@ export const AppProvider = ({ children }) => {
       setToken(data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
       toast.success("Logged in successfully");
+      return true;
     } catch (err) {
       toast.error(err.response?.data?.message || "Login Failed");
       return false;
@@ -60,6 +61,7 @@ export const AppProvider = ({ children }) => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
     toast.success("Logged out");
+    navigate("/login");
   };
 
   //Tasks

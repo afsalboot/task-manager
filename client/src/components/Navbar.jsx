@@ -31,13 +31,14 @@ const Navbar = () => {
         
         <Link
           to="/profile"
-          className="flex items-center gap-2 px-3 py-1 rounded dark:bg-dark-button hover:bg-light-hover dark:hover:bg-dark-hover transition-colors duration-300"
+          className="flex items-center gap-2 px-3 py-1 rounded text-light-text dark:text-dark-text bg-light-button dark:bg-dark-button hover:bg-light-hover dark:hover:bg-dark-hover transition-colors duration-300 cursor-pointer"
         >
           <User size={16} /> {user.name || user.email}
         </Link>
         <button
           onClick={logout}
-          className="px-3 py-1 rounded hover:bg-red-500 dark:hover:bg-red-700 flex items-center gap-2 transition-colors duration-300"
+          className="px-3 py-1 rounded bg-red-500 hover:bg-red-400 
+          dark:bg-red-600 dark:hover:bg-red-700 flex items-center gap-2 transition-colors duration-300 cursor-pointer"
         >
           <LogOut size={16} /> Logout
         </button>
