@@ -27,7 +27,7 @@
   --color-dark-text: #F2EAD3;
   --color-dark-button: #1c2541;
   --color-dark-hover: #333631;
-  --color-dark-bg-form: #081d2b;
+  
   --color-hover-dark: #293655;
 }
 
@@ -40,7 +40,6 @@
   --color-light-button: #1b1b1c;
   --color-light-bg: #e0c392;
   --color-light-hover: #3a506b;
-  --color-light-bg-form: #e0c392;
   --color-hover-light: #e9e1c9;
 }
 
@@ -87,8 +86,4 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 input[type="date"]::-webkit-calendar-picker-indicator:hover {
   opacity: 1;
-}
-
-svg {
-  stroke: currentColor;
 }

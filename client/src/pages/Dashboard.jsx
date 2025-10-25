@@ -221,18 +221,16 @@ const Dashboard = () => {
                   value: d.value,
                   color: COLORS[i],
                 }))}
-                margin={{ top: 40, right: 40, bottom: 60, left: 40 }}
+                margin={{ top: 40, right: 80, bottom: 60, left: 80 }}
                 innerRadius={0.5}
                 padAngle={20}
                 cornerRadius={5}
                 activeOuterRadiusOffset={8}
                 colors={{ datum: "data.color" }}
+                borderWidth={0}
                 arcLabelsTextColor={dark ? "#e5e7eb" : "#333"}
                 arcLinkLabelsSkipAngle={2}
                 arcLinkLabelsTextColor={dark ? "#e5e7eb" : "#333"}
-                arcLinkLabelsDiagonalLength={10}
-                arcLinkLabelsStraightLength={10}
-                arcLinkLabelsOffset={5}
                 legends={[
                   {
                     anchor: "bottom",
@@ -246,12 +244,12 @@ const Dashboard = () => {
                     symbolShape: "circle",
                   },
                 ]}
-                theme={{
-                  textColor: "#ccc",
-                  tooltip: {
-                    container: { background: "#1f2937", color: "#f9fafb" },
-                  },
-                }}
+                // theme={{
+                //   textColor: "#ccc",
+                //   tooltip: {
+                //     container: { background: "#1f2937", color: "#f9fafb" },
+                //   },
+                // }}
               />
             </div>
           </>
