@@ -24,6 +24,7 @@ app.use(cors({ origin: process.env.CLIENT_URL || "*" }));
 app.use(express.json());
 
 // Define route handlers
+app.get('/', (req,res)=>res.send('Server is Live!'))
 app.use("/api/auth", authRoutes); // Routes for login/register
 app.use("/api/task", taskRoute); // Routes for task operations
 app.use("/api/user", userRoute); // Routes for user operations
