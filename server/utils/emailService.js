@@ -14,7 +14,7 @@ const resend = new Resend(process.env.RESEND_API_KEY)
 
 const sendEmail = async (to, subject, html) => {
     try {
-        await transporter.sendMail({
+        await resend.emails.sendMail({
             from: `"Task Manager" <${process.env.EMAIL_USER}>`,
             to,
             subject,
