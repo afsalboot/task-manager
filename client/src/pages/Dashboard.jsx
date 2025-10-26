@@ -195,7 +195,7 @@ const Dashboard = () => {
               )}
             </Droppable>
           </DragDropContext>
-        ) : (
+        ) : !user || !token ? (
           <div className="text-center py-20 text-light-text-dull dark:text-dark-text">
             <p className="text-2xl font-semibold mb-3">
               “Productivity starts with a single task.”
@@ -203,6 +203,10 @@ const Dashboard = () => {
             <p className="text-lg opacity-80">
               Click Add Task to start organizing your day 🚀
             </p>
+          </div>
+        ) : (
+          <div className="text-center py-20 text-light-text-dull dark:text-dark-text">
+            <p className="text-lg opacity-80">No tasks match your filters.</p>
           </div>
         )}
 

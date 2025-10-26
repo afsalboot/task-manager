@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { AppContext } from "../context/AppContext.jsx";
 import { Link } from "react-router";
 import { LogOut, Moon, Sun, User } from "lucide-react";
+import { logo } from "../assets/assets.js";
 
 const Navbar = () => {
   const { user, logout, dark, setDark, hideSignupButton } = useContext(AppContext);
@@ -12,8 +13,9 @@ const Navbar = () => {
       <div className="flex items-center gap-4">
         <Link
           to="/"
-          className="text-xl font-bold text-light-title dark:text-dark-title transition-colors duration-300"
+          className="flex items-center gap-2  text-xl font-bold text-light-title dark:text-dark-title transition-colors duration-300"
         >
+          <img src={logo} alt={logo} className="w-10 h-8"/>
           Task Manager
         </Link>
       </div>
