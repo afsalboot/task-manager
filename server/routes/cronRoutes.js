@@ -18,3 +18,4 @@ router.get("/run-tasks", async (req, res) => {
   }
 });
 
+module.exports = router
