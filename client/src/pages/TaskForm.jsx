@@ -43,7 +43,7 @@ const TaskForm = () => {
   return (
     <div className="flex justify-center items-start min-h-screen bg-light-primary-dull dark:bg-dark-primary-dull transition-colors duration-300 px-4 py-10">
       <div className="w-full max-w-md p-6 rounded-2xl shadow-lg bg-light-primary dark:bg-dark-bg-form transition-colors duration-300">
-        <h2 className="text-2xl font-bold mb-6 text-center text-light-text-dull dark:text-dark-text">
+        <h2 className="text-2xl font-bold mb-6 text-center text-light-text-dull dark:text-light-text-dull">
           Add New Task
         </h2>
 

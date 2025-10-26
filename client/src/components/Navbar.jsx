@@ -16,7 +16,7 @@ const Navbar = () => {
           className="flex items-center gap-2  text-xl font-bold text-light-title dark:text-dark-title transition-colors duration-300"
         >
           <img src={logo} alt={logo} className="w-10 h-8"/>
-          Task Manager
+          For Task
         </Link>
       </div>
 

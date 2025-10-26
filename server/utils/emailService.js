@@ -5,8 +5,7 @@ require("dotenv").config();
 
 const apiInstance = new Brevo.TransactionalEmailsApi();
 
-console.log("BREVO_API_KEY:", process.env.BREVO_API_KEY);
-console.log("EMAIL_SENDER:", process.env.EMAIL_SENDER);
+
 
 // Set your API key
 apiInstance.setApiKey(
@@ -24,10 +23,10 @@ const sendEmail = async (to, subject, htmlContent) => {
     };
 
     const response = await apiInstance.sendTransacEmail(sendSmtpEmail);
-    console.log("✅ Email sent:", response);
+    console.log("Email sent:", response);
     return response;
   } catch (error) {
-    console.error("❌ Error sending email:", error.response?.body || error.message);
+    console.error("Error sending email:", error.response?.body || error.message);
   }
 };
 

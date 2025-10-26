@@ -55,10 +55,7 @@ const Dashboard = () => {
       const today = new Date();
       today.setHours(0, 0, 0, 0);
 
-      if (
-        filter.dueDate === "Today" &&
-        taskDate.toDateString() !== today.toDateString()
-      )
+      if (filter.dueDate === "Today" && taskDate.toDateString() !== today.toDateString())
         return false;
 
       if (filter.dueDate === "This Week") {
@@ -121,37 +118,43 @@ const Dashboard = () => {
         </div>
 
         {/* Filter */}
-        <div className="flex flex-wrap gap-3 mb-6">
-          {["status", "priority", "dueDate"].map((key) => (
-            <select
-              key={key}
-              value={filter[key]}
-              onChange={(e) => setFilter({ ...filter, [key]: e.target.value })}
-              className="bg-light-primary dark:bg-dark-primary text-light-text-dull dark:text-dark-text p-2 rounded-md cursor-pointer"
-            >
-              {key === "status" &&
-                ["All", "Pending", "In Progress", "Completed"].map((v) => (
-                  <option key={v}>{v}</option>
-                ))}
-              {key === "priority" &&
-                ["All", "Low", "Medium", "High"].map((v) => (
-                  <option key={v}>{v}</option>
-                ))}
-              {key === "dueDate" &&
-                [
-                  "All",
-                  "Today",
-                  "This Week",
-                  "This Month",
-                  "Next Month",
-                  "Overdue",
-                ].map((v) => <option key={v}>{v}</option>)}
-            </select>
-          ))}
-        </div>
+        {user && token && (
+          <div className="flex flex-wrap gap-3 mb-6">
+            {["status", "priority", "dueDate"].map((key) => (
+              <select
+                key={key}
+                value={filter[key]}
+                onChange={(e) => setFilter({ ...filter, [key]: e.target.value })}
+                className="bg-light-primary dark:bg-dark-primary text-light-text-dull dark:text-dark-text p-2 rounded-md cursor-pointer"
+              >
+                {key === "status" &&
+                  ["All", "Pending", "In Progress", "Completed"].map((v) => (
+                    <option key={v}>{v}</option>
+                  ))}
+                {key === "priority" &&
+                  ["All", "Low", "Medium", "High"].map((v) => (
+                    <option key={v}>{v}</option>
+                  ))}
+                {key === "dueDate" &&
+                  ["All", "Today", "This Week", "This Month", "Next Month", "Overdue"].map((v) => (
+                    <option key={v}>{v}</option>
+                  ))}
+              </select>
+            ))}
+          </div>
+        )}
 
-        {/* Task List */}
-        {loading ? (
+        {/* Content */}
+        {!user || !token ? (
+          <div className="text-center py-20 text-light-text-dull dark:text-dark-text">
+            <p className="text-2xl font-semibold mb-3">
+              “Welcome! Productivity starts with a single task.”
+            </p>
+            <p className="text-lg opacity-80">
+              Log in or sign up to start organizing your day 🚀
+            </p>
+          </div>
+        ) : loading ? (
           <div className="flex justify-center items-center py-20">
             <Loading size={28} color="light-title dark:dark-title" />
           </div>
@@ -159,17 +162,9 @@ const Dashboard = () => {
           <DragDropContext onDragEnd={handleDragEnd}>
             <Droppable droppableId="taskList">
               {(provided) => (
-                <ul
-                  {...provided.droppableProps}
-                  ref={provided.innerRef}
-                  className="space-y-3"
-                >
-                  {filteredTasks?.map((task, index) => (
-                    <Draggable
-                      key={task._id}
-                      draggableId={task._id}
-                      index={index}
-                    >
+                <ul {...provided.droppableProps} ref={provided.innerRef} className="space-y-3">
+                  {filteredTasks.map((task, index) => (
+                    <Draggable key={task._id} draggableId={task._id} index={index}>
                       {(provided) => (
                         <li
                           ref={provided.innerRef}
@@ -195,15 +190,6 @@ const Dashboard = () => {
               )}
             </Droppable>
           </DragDropContext>
-        ) : !user || !token ? (
-          <div className="text-center py-20 text-light-text-dull dark:text-dark-text">
-            <p className="text-2xl font-semibold mb-3">
-              “Productivity starts with a single task.”
-            </p>
-            <p className="text-lg opacity-80">
-              Click Add Task to start organizing your day 🚀
-            </p>
-          </div>
         ) : (
           <div className="text-center py-20 text-light-text-dull dark:text-dark-text">
             <p className="text-lg opacity-80">No tasks match your filters.</p>
@@ -248,12 +234,6 @@ const Dashboard = () => {
                     symbolShape: "circle",
                   },
                 ]}
-                // theme={{
-                //   textColor: "#ccc",
-                //   tooltip: {
-                //     container: { background: "#1f2937", color: "#f9fafb" },
-                //   },
-                // }}
               />
             </div>
           </>
