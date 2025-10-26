@@ -5,7 +5,7 @@ const cors = require("cors");
 const connectDB = require("./db.js");
 const authRoutes = require("./routes/authRoutes.js");
 const taskRoute = require("./routes/taskRoutes.js");
-const checkTasks = require("./corn/taskNotifier.js");
+const {checkTasks} = require("./corn/taskNotifier.js");
 
 require("dotenv").config();
 

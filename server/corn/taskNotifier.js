@@ -1,7 +1,7 @@
-import cron from "node-cron";
-import Task from "../models/Task.js";
-import sendEmail from "../utils/emailService.js";
-import { taskReminderTemplate, overdueTaskTemplate } from "../utils/emailTemplates.js";
+const cron =  require("node-cron");
+const Task = require("../models/Task.js");
+const {sendEmail} = require("../utils/emailService.js");
+const { taskReminderTemplate, overdueTaskTemplate } = require("../utils/emailTemplates.js");
 
 const checkTasks = async () => {
   try {
@@ -54,7 +54,7 @@ cron.schedule("0 9 * * *", () => {
   checkTasks();
 });
 
-export default checkTasks;
+module.exports = {checkTasks};
 
 
 
