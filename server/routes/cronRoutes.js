@@ -1,7 +1,7 @@
 // cronRoutes.js
 const express = require("express");
 const router = express.Router();
-const checkTasks = require("../cron/taskNotifier.js");
+const checkTasks = require("../corn/taskNotifier");
 
 router.get("/run-tasks", async (req, res) => {
   try {

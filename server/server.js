@@ -5,7 +5,6 @@ const cors = require("cors");
 const connectDB = require("./db.js");
 const authRoutes = require("./routes/authRoutes.js");
 const taskRoute = require("./routes/taskRoutes.js");
-const checkTasks = require("./corn/taskNotifier.js");
 const cronRoutes = require("./routes/cronRoutes");
 
 require("dotenv").config();
@@ -15,9 +14,6 @@ const PORT = process.env.PORT || 5000;
 
 // Connect to the database
 connectDB();
-
-// Start the cron job
-checkTasks();
 
 // Middleware setup
 app.use(cors({ origin: process.env.CLIENT_URL || "*" }));
