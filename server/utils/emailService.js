@@ -10,6 +10,7 @@ const transporter = nodemailer.createTransport({
 });
 
 const sendEmail = async (to, subject, html) => {
+    console.log("Sending email...")
   try {
     const info = await transporter.sendMail({
       from: `"Task Manager" <${process.env.EMAIL_USER}>`,
