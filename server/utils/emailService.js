@@ -1,3 +1,38 @@
+import Brevo from "@getbrevo/brevo";
+import dotenv from "dotenv";
+dotenv.config();
+
+const defaultClient = Brevo.ApiClient.instance;
+const apiKey = defaultClient.authentications["api-key"];
+apiKey.apiKey = process.env.BREVO_API_KEY;
+
+const sendEmail = async (to, subject, htmlContent) => {
+  try {
+    const apiInstance = new Brevo.TransactionalEmailsApi();
+
+    const sendSmtpEmail = new Brevo.SendSmtpEmail();
+    sendSmtpEmail.sender = { name: "ForTask", email: process.env.EMAIL_SENDER };
+    sendSmtpEmail.to = [{ email: to }];
+    sendSmtpEmail.subject = subject;
+    sendSmtpEmail.htmlContent = htmlContent;
+
+    const response = await apiInstance.sendTransacEmail(sendSmtpEmail);
+    console.log("Email sent:", response.messageId);
+    return response;
+  } catch (error) {
+    console.error("Error sending email:", error.response?.text || error.message);
+  }
+};
+
+export default sendEmail;
+
+
+
+
+
+
+
+
 // const nodemailer = require("nodemailer");
 // require("dotenv").config();
 
