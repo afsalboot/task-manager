@@ -1,11 +1,34 @@
 // taskNotifier.js
+const nodemailer = require("nodemailer");
 const Task = require("../models/Task.js");
-const sendEmail = require("../utils/emailService.js");
 const { taskReminderTemplate, overdueTaskTemplate } = require("../utils/emailTemplates.js");
+require("dotenv").config();
 
-// Flag to ensure the task runs only once per day
-let lastRunDate = null;
+// EMAIL SENDER
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS, // Use App Password if 2FA is enabled
+  },
+});
 
+const sendEmail = async (to, subject, html, retries = 2) => {
+  console.log("Sending email to:", to);
+  try {
+    const info = await transporter.sendMail({ from: `"Task Manager" <${process.env.EMAIL_USER}>`, to, subject, html });
+    console.log(`Email sent to ${to}: ${info.response}`);
+  } catch (err) {
+    if (retries > 0) {
+      console.warn(`⚠️ Retry sending email... (${2 - retries + 1})`);
+      await new Promise((r) => setTimeout(r, 2000));
+      return sendEmail(to, subject, html, retries - 1);
+    }
+    console.error("Email send error:", err.message);
+  }
+};
+
+// ------------------- TASK CHECKER -------------------
 const checkTasks = async () => {
   try {
     const now = new Date();
@@ -22,22 +45,12 @@ const checkTasks = async () => {
       const dashboardLink = "https://fortask.netlify.app";
 
       // Reminder for tasks due tomorrow (send only once)
-      if (
-        dueDate.toDateString() === tomorrow.toDateString() &&
-        !task.lastReminderSent
-      ) {
+      if (dueDate.toDateString() === tomorrow.toDateString() && !task.lastReminderSent) {
         await sendEmail(
           email,
           `Upcoming Task Reminder: ${task.title}`,
-          taskReminderTemplate(
-            task.user.name || "User",
-            task.title,
-            task.dueDate,
-            dashboardLink
-          )
+          taskReminderTemplate(task.user.name || "User", task.title, task.dueDate, dashboardLink)
         );
-
-        // Mark reminder as sent
         task.lastReminderSent = new Date();
         await task.save();
       }
@@ -47,12 +60,7 @@ const checkTasks = async () => {
         await sendEmail(
           email,
           `Overdue Task Alert: ${task.title}`,
-          overdueTaskTemplate(
-            task.user.name || "User",
-            task.title,
-            task.dueDate,
-            dashboardLink
-          )
+          overdueTaskTemplate(task.user.name || "User", task.title, task.dueDate, dashboardLink)
         );
       }
     }
@@ -63,19 +71,34 @@ const checkTasks = async () => {
   }
 };
 
-// Run every minute, check IST time, execute once per day
-setInterval(() => {
+// ------------------- SCHEDULE DAILY RUN AT 9 AM IST -------------------
+const scheduleDailyTaskCheck = () => {
   const now = new Date();
-  const istHour = (now.getUTCHours() + 5 + Math.floor((now.getUTCMinutes() + 30) / 60)) % 24;
-  const istMinutes = (now.getUTCMinutes() + 30) % 60;
-  const today = now.toLocaleDateString("en-IN");
 
-  // Run at 9:00–9:09 IST, only once per day
-  if (istHour === 9 && istMinutes < 10 && lastRunDate !== today) {
-    console.log("Running daily task check (IST)...");
-    checkTasks();
-    lastRunDate = today;
+  // IST is UTC+5:30
+  const istOffset = 5.5 * 60; // minutes
+  const utcMinutes = now.getUTCMinutes();
+  const utcHours = now.getUTCHours();
+
+  const istNow = new Date(now.getTime() + istOffset * 60 * 1000);
+
+  const nextRun = new Date(istNow);
+  nextRun.setHours(9, 0, 0, 0); // 9:00 AM IST
+
+  if (istNow >= nextRun) {
+    nextRun.setDate(nextRun.getDate() + 1); // schedule for tomorrow if past 9 AM
   }
-}, 60 * 1000);
+
+  const delay = nextRun.getTime() - istNow.getTime();
+  console.log(`Next task check scheduled in ${Math.round(delay / 1000 / 60)} minutes`);
+
+  setTimeout(async () => {
+    await checkTasks();
+    scheduleDailyTaskCheck(); // schedule next run
+  }, delay);
+};
+
+// Start the scheduler
+scheduleDailyTaskCheck();
 
 module.exports = checkTasks;
