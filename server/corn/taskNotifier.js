@@ -1,11 +1,10 @@
-// cron/taskNotifier.js
-const cron = require("node-cron");
+// taskNotifier.js
 const Task = require("../models/Task.js");
 const sendEmail = require("../utils/emailService.js");
-const {
-  taskReminderTemplate,
-  overdueTaskTemplate,
-} = require("../utils/emailTemplates.js");
+const { taskReminderTemplate, overdueTaskTemplate } = require("../utils/emailTemplates.js");
+
+// Flag to ensure the task runs only once per day
+let lastRunDate = null;
 
 const checkTasks = async () => {
   try {
@@ -57,12 +56,26 @@ const checkTasks = async () => {
         );
       }
     }
+
+    console.log("Task check completed.");
   } catch (error) {
-    console.error("Error in cron job:", error.message);
+    console.error("Error in task check:", error.message);
   }
 };
 
-// Run daily at 9 AM
-cron.schedule("0 9 * * *", checkTasks);
+// Run every minute, check IST time, execute once per day
+setInterval(() => {
+  const now = new Date();
+  const istHour = (now.getUTCHours() + 5 + Math.floor((now.getUTCMinutes() + 30) / 60)) % 24;
+  const istMinutes = (now.getUTCMinutes() + 30) % 60;
+  const today = now.toLocaleDateString("en-IN");
+
+  // Run at 9:00–9:09 IST, only once per day
+  if (istHour === 9 && istMinutes < 10 && lastRunDate !== today) {
+    console.log("Running daily task check (IST)...");
+    checkTasks();
+    lastRunDate = today;
+  }
+}, 60 * 1000);
 
 module.exports = checkTasks;
