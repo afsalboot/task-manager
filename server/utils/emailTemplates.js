@@ -14,7 +14,7 @@ exports.taskReminderTemplate = (userName, taskTitle, dueDate, link) => `
         <a href="${link}" style="display:inline-block; margin-top: 16px; padding: 10px 20px; background: #3b82f6; color: white; text-decoration: none; border-radius: 6px;">
           View Task
         </a>
-        <p style="margin-top: 24px; color: #6b7280;">Stay productive,<br/>The Task Manager Team</p>
+        <p style="margin-top: 24px; color: #6b7280;">Stay productive,<br/>The For Task Team</p>
       </div>
     </div>
   </div>
@@ -34,7 +34,7 @@ exports.overdueTaskTemplate = (userName, taskTitle, dueDate, link) => `
         <a href="${link}" style="display:inline-block; margin-top: 16px; padding: 10px 20px; background: #ef4444; color: white; text-decoration: none; border-radius: 6px;">
           Open Dashboard
         </a>
-        <p style="margin-top: 24px; color: #6b7280;">Please complete it as soon as possible.<br/>— Task Manager Team</p>
+        <p style="margin-top: 24px; color: #6b7280;">Please complete it as soon as possible.<br/>— The For Task Team</p>
       </div>
     </div>
   </div>

@@ -4,6 +4,7 @@ import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 import { ResponsivePie } from "@nivo/pie";
 import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
+import { motion } from "framer-motion";
 import { AppContext } from "../context/AppContext.jsx";
 import TaskCard from "../components/TaskCard.jsx";
 import Loading from "../components/Loading.jsx";
@@ -55,7 +56,10 @@ const Dashboard = () => {
       const today = new Date();
       today.setHours(0, 0, 0, 0);
 
-      if (filter.dueDate === "Today" && taskDate.toDateString() !== today.toDateString())
+      if (
+        filter.dueDate === "Today" &&
+        taskDate.toDateString() !== today.toDateString()
+      )
         return false;
 
       if (filter.dueDate === "This Week") {
@@ -124,7 +128,9 @@ const Dashboard = () => {
               <select
                 key={key}
                 value={filter[key]}
-                onChange={(e) => setFilter({ ...filter, [key]: e.target.value })}
+                onChange={(e) =>
+                  setFilter({ ...filter, [key]: e.target.value })
+                }
                 className="bg-light-primary dark:bg-dark-primary text-light-text-dull dark:text-dark-text p-2 rounded-md cursor-pointer"
               >
                 {key === "status" &&
@@ -136,7 +142,14 @@ const Dashboard = () => {
                     <option key={v}>{v}</option>
                   ))}
                 {key === "dueDate" &&
-                  ["All", "Today", "This Week", "This Month", "Next Month", "Overdue"].map((v) => (
+                  [
+                    "All",
+                    "Today",
+                    "This Week",
+                    "This Month",
+                    "Next Month",
+                    "Overdue",
+                  ].map((v) => (
                     <option key={v}>{v}</option>
                   ))}
               </select>
@@ -158,13 +171,35 @@ const Dashboard = () => {
           <div className="flex justify-center items-center py-20">
             <Loading size={28} color="light-title dark:dark-title" />
           </div>
+        ) : tasks.length === 0 ? (
+          <div className="text-center py-20 text-light-text-dull dark:text-dark-text">
+            <p className="text-2xl font-semibold mb-3">No tasks yet 🎯</p>
+            <p className="text-lg opacity-80">
+              Create your first task to get started!
+            </p>
+            <button
+              onClick={handleAddTaskClick}
+              className="mt-5 px-5 py-2 rounded-lg bg-light-button dark:bg-dark-button text-light-text dark:text-dark-text hover:bg-light-hover dark:hover:bg-dark-hover transition"
+            >
+              <PlusSquare size={18} className="inline mr-2" />
+              Add Task
+            </button>
+          </div>
         ) : filteredTasks.length > 0 ? (
           <DragDropContext onDragEnd={handleDragEnd}>
             <Droppable droppableId="taskList">
               {(provided) => (
-                <ul {...provided.droppableProps} ref={provided.innerRef} className="space-y-3">
+                <ul
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                  className="space-y-3"
+                >
                   {filteredTasks.map((task, index) => (
-                    <Draggable key={task._id} draggableId={task._id} index={index}>
+                    <Draggable
+                      key={task._id}
+                      draggableId={task._id}
+                      index={index}
+                    >
                       {(provided) => (
                         <li
                           ref={provided.innerRef}
@@ -196,9 +231,14 @@ const Dashboard = () => {
           </div>
         )}
 
-        {/* Chart */}
-        {user && token && (
-          <>
+        {/* Chart - only after first task */}
+        {user && token && tasks.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="mt-10"
+          >
             <h2 className="text-lg font-semibold mb-2 ml-5 flex items-center gap-2 text-light-text-dull dark:text-light-text">
               <PieChart size={20} />
               Task Progress Overview
@@ -213,7 +253,7 @@ const Dashboard = () => {
                 }))}
                 margin={{ top: 40, right: 80, bottom: 60, left: 80 }}
                 innerRadius={0.5}
-                padAngle={20}
+                padAngle={2}
                 cornerRadius={5}
                 activeOuterRadiusOffset={8}
                 colors={{ datum: "data.color" }}
@@ -236,7 +276,7 @@ const Dashboard = () => {
                 ]}
               />
             </div>
-          </>
+          </motion.div>
         )}
       </div>
     </div>

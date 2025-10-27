@@ -78,7 +78,7 @@ const TaskForm = () => {
           >
             <option>Pending</option>
             <option>In Progress</option>
-            <option>Completed</option>
+            {/* <option>Completed</option> */}
           </select>
 
           {/* Priority */}
