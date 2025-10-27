@@ -1,6 +1,6 @@
 const cron = require("node-cron");
 const Task = require("../models/Task");
-const { sendEmail } = require("./emailService");
+const { sendEmail } = require("../utils/emailService");
 const { taskReminderTemplate, overdueTaskTemplate } = require("../template/emailTemplates");
 
 const checkTasks = async () => {
