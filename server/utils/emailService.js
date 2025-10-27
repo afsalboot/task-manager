@@ -2,7 +2,7 @@
 const Brevo = require("@getbrevo/brevo");
 require("dotenv").config();
 
-const { welcomeEmailTemplate } = require("./welcomeEmailTemplate");
+const { welcomeEmailTemplate } = require("../template/welcomeMail");
 
 // Initialize Brevo Transactional Email API
 const apiInstance = new Brevo.TransactionalEmailsApi();
