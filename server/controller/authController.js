@@ -1,11 +1,9 @@
 const argon = require("argon2");
 const User = require("../models/User.js");
 const { generateToken } = require("../utils/generateToken.js");
+const { sendWelcomeEmail } = require("../utils/emailService.js"); // 👈 import
 
 //Register a new user
-const argon = require("argon2");
-const User = require("../models/User.js");
-const { sendWelcomeEmail } = require("../utils/emailService.js"); // 👈 import
 
 const register = async (req, res) => {
   const { name, email, password } = req.body;
