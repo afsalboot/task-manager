@@ -38,7 +38,7 @@ const checkTasks = async () => {
 };
 
 // Run every day at 9 AM India time
-cron.schedule("*/10 * * * * *", () => {
+cron.schedule("0 9 * * *", () => {
   console.log("⏰ Running daily task notification job...");
   checkTasks();
 }, { timezone: "Asia/Kolkata" });
