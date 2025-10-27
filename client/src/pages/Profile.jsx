@@ -15,30 +15,30 @@ const Profile = () => {
 
   return (
     <div className="min-h-screen flex justify-center items-center bg-light-primary-dull dark:bg-dark-primary-dull transition-colors duration-300 px-4 py-6">
-      <div className="w-full max-w-2xl sm:max-w-3xl lg:max-w-4xl bg-light-bg-form dark:bg-dark-bg-form shadow-lg rounded-2xl p-6 sm:p-8">
+      <div className="w-full max-w-2xl sm:max-w-3xl lg:max-w-4xl rounded-2xl p-6 sm:p-8">
         {/* Back Button */}
         <button
           onClick={() => navigate("/")}
-          className="flex items-center gap-2 mb-6 text-blue-600 dark:text-blue-400 hover:underline"
+          className="flex items-center gap-2 mb-6 text-[#4B0082] dark:text-[#A694F7] hover:underline"
         >
           <ArrowLeft className="w-5 h-5" />
           <span className="hidden md:inline">Back to Dashboard</span>
         </button>
 
-        <h1 className="text-3xl font-bold text-center text-light-text-dull dark:text-dark-text mb-8 sm:text-4xl">
+        <h1 className="text-3xl font-bold text-center text-[#4B0082] dark:text-[#A694F7] mb-8 sm:text-4xl">
           Profile
         </h1>
 
         {/* User Info */}
         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6 mb-8">
-          <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-blue-500 flex items-center justify-center text-white text-3xl sm:text-4xl font-bold shadow-md">
+          <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#4B0082] dark:bg-[#A694F7] flex items-center justify-center text-dark-text dark:text-light-text text-3xl sm:text-4xl font-bold shadow-md">
             {user?.name?.charAt(0)?.toUpperCase() || "U"}
           </div>
           <div className="text-center sm:text-left">
-            <h2 className="text-xl sm:text-2xl font-semibold text-light-text-dull dark:text-dark-text">
+            <h2 className="text-xl sm:text-2xl font-semibold text-light-text dark:text-dark-text">
               {user?.name || "Unknown User"}
             </h2>
-            <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base break-words">
+            <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base wrap-break-word">
               {user?.email}
             </p>
           </div>
@@ -74,7 +74,7 @@ const Profile = () => {
 
         {/* Progress Overview */}
         <div className="mt-8 sm:mt-10">
-          <h3 className="text-lg sm:text-xl font-semibold mb-2 text-light-text-dull dark:text-dark-text">
+          <h3 className="text-lg sm:text-xl font-semibold mb-2 text-[#4B0082] dark:text-[#A694F7]">
             Task Completion Overview
           </h3>
           <ProgressBar

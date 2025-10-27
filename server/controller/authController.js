@@ -3,6 +3,10 @@ const User = require("../models/User.js");
 const { generateToken } = require("../utils/generateToken.js");
 
 //Register a new user
+const argon = require("argon2");
+const User = require("../models/User.js");
+const { sendWelcomeEmail } = require("../utils/emailService.js"); // 👈 import
+
 const register = async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -20,12 +24,17 @@ const register = async (req, res) => {
     user = new User({ name, email, password: hashedPassword });
     await user.save();
 
+    sendWelcomeEmail(email, name)
+      .then(() => console.log(`Welcome email sent to ${email}`))
+      .catch((err) => console.error("Welcome email error:", err.message));
+
+    // Respond immediately
     res.status(201).json({
       message: "User registered successfully",
       registeredUser: {
         id: user._id,
         name: user.name,
-        email: user.email
+        email: user.email,
       },
     });
   } catch (err) {
@@ -33,6 +42,8 @@ const register = async (req, res) => {
     res.status(500).json({ message: "Server error during registration" });
   }
 };
+
+module.exports = { register };
 
 //Login user and return JWT token
 const login = async (req, res) => {

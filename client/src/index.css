@@ -8,39 +8,25 @@
 
 /* Colors */
 
-
-/* Titles */
-@theme {
-  --color-light-title: #111111;
-  --color-dark-title: #F2EAD3;
-}
 /* Loader */
 @theme {
-  --color-light-loader: #6B7280;
-  --color-dark-loader: #E5E7EB;
+  --color-light-loader: #111111;
+  --color-dark-loader: #ffffff;
 }
 
 /* Dark Theme */
 @theme {
-  --color-dark-primary: #222222;
-  --color-dark-primary-dull: #111111;
-  --color-dark-text: #F2EAD3;
-  --color-dark-button: #1c2541;
-  --color-dark-hover: #333631;
-  
-  --color-hover-dark: #293655;
+  --color-dark-primary: #2C2A2D;
+  --color-dark-primary-dull: #3C474D;
+  --color-dark-text: #ffffff;
 }
 
 /* Light Theme */
 @theme {
-  --color-light-primary: #f5f0e6;
-  --color-light-primary-dull: #F2EAD3;
-  --color-light-text: #d5d5d5;
-  --color-light-text-dull: #1b1b1c;
-  --color-light-button: #1b1b1c;
-  --color-light-bg: #e0c392;
-  --color-light-hover: #3a506b;
-  --color-hover-light: #e9e1c9;
+  --color-light-primary: #D3D3D3;
+  --color-light-primary-dull: #F0F0F0;
+  --color-light-text: #000000;
+  
 }
 
 /* Task Status Colors */
@@ -74,16 +60,4 @@ body {
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
-}
-
-/* Date Picker Styles */
-input[type="date"]::-webkit-calendar-picker-indicator {
-  filter: invert(1);
-  opacity: 0.8;
-  cursor: pointer;
-  transition: opacity 0.3s ease;
-}
-
-input[type="date"]::-webkit-calendar-picker-indicator:hover {
-  opacity: 1;
 }

@@ -61,9 +61,18 @@ const TaskCard = ({ task }) => {
 
   // Status styles + icons
   const statusInfo = {
-    Pending: { color: "bg-pending-status text-text-status", icon: <Clock size={12} /> },
-    "In Progress": { color: "bg-inprogress-status text-text-status", icon: <Play size={12} /> },
-    Completed: { color: "bg-complete-status text-text-status", icon: <Check size={12} /> },
+    Pending: {
+      color: "bg-pending-status text-text-status",
+      icon: <Clock size={12} />,
+    },
+    "In Progress": {
+      color: "bg-inprogress-status text-text-status",
+      icon: <Play size={12} />,
+    },
+    Completed: {
+      color: "bg-complete-status text-text-status",
+      icon: <Check size={12} />,
+    },
   };
 
   // Priority badge color
@@ -77,7 +86,7 @@ const TaskCard = ({ task }) => {
   return (
     <div
       className={`p-4 rounded-xl shadow-md mb-3 transition-all duration-300
-      bg-light-primary dark:bg-dark-primary hover:scale-[1.02] hover:shadow-lg`}
+      bg-light-primary dark:bg-dark-primary`}
     >
       <div className="flex justify-between items-start gap-3">
         {/* Left: Status Toggle + Content */}
@@ -100,14 +109,14 @@ const TaskCard = ({ task }) => {
                   type="text"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  className="border p-1 rounded-md mb-2 bg-light-primary dark:bg-dark-primary text-light-text-dull dark:text-dark-text "
+                  className="border p-1 rounded-md mb-2 bg-dark-primary dark:bg-light-primary text-dark-text dark:text-light-text"
                 />
                 <textarea
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   rows="2"
                   placeholder="Add description..."
-                  className="border p-1 rounded-md dark:bg-dark-primary dark:text-light-text"
+                  className="border p-1 rounded-md bg-dark-primary dark:bg-light-primary text-dark-text dark:text-light-text"
                 />
               </>
             ) : (
@@ -116,7 +125,7 @@ const TaskCard = ({ task }) => {
                   className={`text-lg font-semibold ${
                     task.status === "Completed"
                       ? "line-through text-gray-400"
-                      : "text-light-text-dull dark:text-dark-text"
+                      : "text-light-text dark:text-dark-text"
                   }`}
                 >
                   {task.title}
@@ -133,12 +142,12 @@ const TaskCard = ({ task }) => {
             <div className="flex items-center gap-3 mt-2">
               <button
                 onClick={togglePriority}
-                className={`text-xs px-2 py-1 rounded-full capitalize font-medium transition-colors duration-200 
+                className={`text-xs px-2 py-1 rounded-full capitalize font-medium transition-colors duration-200 cursor-pointer 
                   ${
                     priorityColors[task.priority?.toLowerCase()] ||
                     priorityColors.medium
                   }`}
-                title="Click to change priority"
+                title={`Priority: ${task.priority}`}
               >
                 {task.priority || "Low"}
               </button>
@@ -156,19 +165,21 @@ const TaskCard = ({ task }) => {
           {editing ? (
             <button
               onClick={handleSave}
-              className="text-blue-500 hover:text-blue-700 transition"
+              className="text-green-500 hover:text-green-700 transition cursor-pointer"
               title="Save"
             >
               <Save size={20} />
             </button>
           ) : (
-            <button
-              onClick={() => setEditing(true)}
-              className="text-yellow-500 hover:text-yellow-700 transition"
-              title="Edit"
-            >
-              <Edit size={20} />
-            </button>
+            task.status !== "Completed" && ( // ✅ Hide edit button if task is completed
+              <button
+                onClick={() => setEditing(true)}
+                className="text-orange-500 hover:text-orange-700 transition cursor-pointer"
+                title="Edit"
+              >
+                <Edit size={20} />
+              </button>
+            )
           )}
 
           <button

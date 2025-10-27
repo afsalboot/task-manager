@@ -1,57 +1,46 @@
-const cron =  require("node-cron");
-const Task = require("../models/Task.js");
-const {sendEmail} = require("../utils/emailService.js");
-const { taskReminderTemplate, overdueTaskTemplate } = require("../utils/emailTemplates.js");
+const cron = require("node-cron");
+const Task = require("../models/Task");
+const { sendEmail } = require("./emailService");
+const { taskReminderTemplate, overdueTaskTemplate } = require("../template/emailTemplates");
 
 const checkTasks = async () => {
   try {
     const now = new Date();
-    const tomorrow = new Date(now);
-    tomorrow.setDate(tomorrow.getDate() + 1);
-
-    // Fetch all tasks (you can optimize by user if needed)
     const allTasks = await Task.find().populate("user", "name email");
 
     for (const task of allTasks) {
       const dueDate = new Date(task.dueDate);
-      const user = task.user;
+      const diffDays = Math.floor((dueDate - now) / (1000 * 60 * 60 * 24));
 
-      if (!user?.email) continue;
+      if (!task.user?.email) continue;
 
-      // Upcoming tasks (due tomorrow)
-      if (
-        dueDate.getDate() === tomorrow.getDate() &&
-        dueDate.getMonth() === tomorrow.getMonth() &&
-        dueDate.getFullYear() === tomorrow.getFullYear() &&
-        task.status !== "completed"
-      ) {
+      if (diffDays === 1 && task.status !== "completed") {
         await sendEmail(
-          user.email,
+          task.user.email,
           `Reminder: ${task.title} is due tomorrow`,
-          taskReminderTemplate(user.name, task.title, dueDate)
+          taskReminderTemplate(task.user.name, task.title, dueDate)
         );
       }
 
-      // Overdue tasks
-      if (dueDate < now && task.status !== "completed") {
+      if (diffDays < 0 && task.status !== "completed") {
         await sendEmail(
-          user.email,
+          task.user.email,
           `Overdue: ${task.title}`,
-          overdueTaskTemplate(user.name, task.title, dueDate)
+          overdueTaskTemplate(task.user.name, task.title, dueDate)
         );
       }
     }
 
-    console.log("Task reminder and overdue check completed");
+    console.log("Task reminder & overdue check complete");
   } catch (err) {
     console.error("Error checking tasks:", err);
   }
 };
 
-// Schedule to run every day at 9 AM
-cron.schedule("0 9 * * *", () => {
-  console.log("⏰ Running task notification cron job...");
+// Run every day at 9 AM India time
+cron.schedule("*/10 * * * * *", () => {
+  console.log("⏰ Running daily task notification job...");
   checkTasks();
-});
+}, { timezone: "Asia/Kolkata" });
 
-module.exports = {checkTasks};
+module.exports = { checkTasks };

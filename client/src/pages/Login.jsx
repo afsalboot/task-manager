@@ -37,8 +37,8 @@ const Login = () => {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-light-primary-dull dark:bg-dark-primary-dull transition-colors duration-300 px-4">
-      <div className="w-full max-w-md sm:max-w-lg bg-light-bg-form dark:bg-dark-bg-form rounded-2xl shadow-lg p-6 sm:p-8">
-        <h2 className="text-2xl sm:text-3xl font-bold text-center text-light-text-dull dark:text-dark-text mb-6">
+      <div className="w-full max-w-md sm:max-w-lg rounded-2xl  p-6 sm:p-8">
+        <h2 className="text-2xl sm:text-3xl font-bold text-center text-[#4B0082] dark:text-[#A694F7] mb-6">
           Login
         </h2>
 
@@ -53,7 +53,7 @@ const Login = () => {
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm sm:text-base font-medium text-light-text-dull dark:text-dark-text mb-1"
+                  className="block text-sm sm:text-base font-medium text-[#A694F7] mb-1"
                 >
                   Email
                 </label>
@@ -61,7 +61,7 @@ const Login = () => {
                   type="email"
                   name="email"
                   autoComplete="off"
-                  className="w-full px-3 py-2 border rounded-md bg-light-primary dark:bg-light-primary-dull text-light-text-dull dark:text-light-text-dull focus:ring-2 focus:ring-blue-500 outline-none"
+                  className="w-full px-3 py-2 rounded-md bg-light-primary dark:bg-dark-primary text-light-text dark:text-dark-text focus:ring-2 focus:ring-[#A694F7] outline-none"
                 />
                 <ErrorMessage
                   name="email"
@@ -74,7 +74,7 @@ const Login = () => {
               <div>
                 <label
                   htmlFor="password"
-                  className="block text-sm sm:text-base font-medium text-light-text-dull dark:text-dark-text mb-1"
+                  className="block text-sm sm:text-base font-medium text-[#A694F7] mb-1"
                 >
                   Password
                 </label>
@@ -82,7 +82,7 @@ const Login = () => {
                   type="password"
                   name="password"
                   autoComplete="new-password"
-                  className="w-full px-3 py-2 border rounded-md bg-light-primary dark:bg-light-primary-dull text-light-text-dull dark:text-light-text-dull focus:ring-2 focus:ring-blue-500 outline-none"
+                  className="w-full px-3 py-2 rounded-md bg-light-primary dark:bg-dark-primary text-light-text dark:text-dark-text focus:ring-2 focus:ring-[#A694F7] outline-none"
                 />
                 <ErrorMessage
                   name="password"
@@ -95,7 +95,7 @@ const Login = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full flex justify-center py-2 bg-light-primary dark:bg-dark-button text-light-text-dull dark:text-dark-text hover:bg-hover-light dark:hover:bg-hover-dark font-semibold rounded-md transition-colors duration-300"
+                className="w-full flex justify-center py-2 font-semibold rounded-md text-dark-text dark:text-light-text bg-[#4B0082] dark:bg-[#A694F7]  hover:bg-[#C1A6D1] transition-colors duration-300"
               >
                 {isSubmitting ? (
                   <Loading size={12} color="text-white" />
@@ -104,11 +104,11 @@ const Login = () => {
                 )}
               </button>
 
-              <p className="text-center text-sm sm:text-base text-gray-600 dark:text-dark-text mt-4">
+              <p className="text-center text-sm sm:text-base text-gray-700 dark:text-gray-100 mt-4">
                 Don’t have an account?{" "}
                 <Link
                   to="/signup"
-                  className="text-blue-600 dark:text-blue-400 hover:underline"
+                  className="text-[#A694F7] hover:underline"
                 >
                   Sign up
                 </Link>

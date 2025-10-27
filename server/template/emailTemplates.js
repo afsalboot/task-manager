@@ -24,7 +24,7 @@ exports.overdueTaskTemplate = (userName, taskTitle, dueDate, link) => `
   <div style="font-family: Arial, sans-serif; background: #fff7f7; padding: 20px;">
     <div style="max-width: 600px; margin: auto; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
       <div style="background: #ef4444; color: white; padding: 16px 24px;">
-        <h2 style="margin: 0;">⚠️ Overdue Task Alert</h2>
+        <h2 style="margin: 0;">Overdue Task Alert</h2>
       </div>
       <div style="padding: 24px;">
         <p>Hi <b>${userName}</b>,</p>
