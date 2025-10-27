@@ -1,4 +1,4 @@
-//Email Template
+// Email Template
 
 const baseEmailWrapper = (title, color, body) => `
 <!DOCTYPE html>
@@ -24,10 +24,10 @@ const baseEmailWrapper = (title, color, body) => `
 </html>
 `;
 
-
+// 📨 Welcome Email
 exports.welcomeEmailTemplate = (name) =>
   baseEmailWrapper(
-    "Welcome to ForTask 🚀",
+    "Welcome to ForTask",
     "#3b82f6",
     `
       <p>Hi <strong>${name}</strong>,</p>
@@ -47,7 +47,7 @@ exports.welcomeEmailTemplate = (name) =>
     `
   );
 
-
+// Daily Task Summary
 exports.dailyTaskSummaryTemplate = (userName, reminders, overdue, link) => {
   const hasReminders = reminders.length > 0;
   const hasOverdue = overdue.length > 0;
@@ -55,7 +55,7 @@ exports.dailyTaskSummaryTemplate = (userName, reminders, overdue, link) => {
   const reminderItems = reminders
     .map(
       (task) =>
-        `<li>📅 <b>${task.title}</b> — due on ${new Date(
+        `<li><b>${task.title}</b> — due on ${new Date(
           task.dueDate
         ).toLocaleDateString()}</li>`
     )
@@ -64,29 +64,45 @@ exports.dailyTaskSummaryTemplate = (userName, reminders, overdue, link) => {
   const overdueItems = overdue
     .map(
       (task) =>
-        `<li>⚠️ <b>${task.title}</b> — was due on ${new Date(
+        `<li><b>${task.title}</b> — was due on ${new Date(
           task.dueDate
         ).toLocaleDateString()}</li>`
     )
     .join("");
 
-  const body = `
+  //All clear message
+  const allClearMessage = `
+    <p>Hi <b>${userName}</b>,</p>
+    <p>You’re all caught up — no pending or overdue tasks right now!</p>
+    <p>Keep that streak going and make today count</p>
+    <a href="${link}"
+       style="display:inline-block; margin-top:20px; padding:10px 20px; background:#3b82f6; color:white; border-radius:6px; text-decoration:none; font-weight:600;">
+       Go to Dashboard
+    </a>
+    <p style="margin-top: 24px; color:#6b7280;">Stay focused and keep winning,<br/>— The ForTask Team</p>
+  `;
+
+  //Main template body
+  const body =
+    !hasReminders && !hasOverdue
+      ? allClearMessage
+      : `
     <p>Hi <b>${userName}</b>,</p>
     ${
       hasReminders
-        ? `<h3 style="color:#3b82f6;">Tasks Due Tomorrow:</h3><ul style="padding-left:20px;">${reminderItems}</ul>`
+        ? `<h3 style="color:#3b82f6;">Tasks Due Tomorrow (${reminders.length}):</h3><ul style="padding-left:20px;">${reminderItems}</ul>`
         : ""
     }
     ${
       hasOverdue
-        ? `<h3 style="color:#ef4444;">Overdue Tasks:</h3><ul style="padding-left:20px;">${overdueItems}</ul>`
+        ? `<h3 style="color:#ef4444;">Overdue Tasks (${overdue.length}):</h3><ul style="padding-left:20px;">${overdueItems}</ul>`
         : ""
     }
     <a href="${link}"
        style="display:inline-block; margin-top:20px; padding:10px 20px; background:#3b82f6; color:white; border-radius:6px; text-decoration:none; font-weight:600;">
        Go to Dashboard
     </a>
-    <p style="margin-top: 24px; color:#6b7280;">Stay focused and keep going 💪<br/>— The ForTask Team</p>
+    <p style="margin-top: 24px; color:#6b7280;">Stay focused and keep going<br/>— The ForTask Team</p>
   `;
 
   return baseEmailWrapper("Your Daily Task Summary", "#3b82f6", body);

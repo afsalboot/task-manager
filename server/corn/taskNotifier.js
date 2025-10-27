@@ -1,7 +1,7 @@
 const cron = require("node-cron");
 const Task = require("../models/Task.js");
 const { sendEmail } = require("../utils/emailService.js");
-const { dailyDigestTemplate } = require("../utils/emailTemplates.js");
+const { dailyTaskSummaryTemplate } = require("../utils/emailTemplates.js"); // ✅ updated name
 
 const checkTasks = async () => {
   try {
@@ -31,17 +31,15 @@ const checkTasks = async () => {
       if (diffDays < 0) userTaskMap.get(userId).overdue.push(task);
     }
 
-    // Send one digest per user
+    // Send one email per user
     for (const [, { user, reminders, overdue }] of userTaskMap) {
-      if (reminders.length === 0 && overdue.length === 0) continue;
-
-      const dashboardLink = process.env.CLIENT_URL || "https://fortask.netlify.app/";
+      const dashboardLink = process.env.CLIENT_URL || "https://fortask.netlify.app";
 
       try {
         await sendEmail(
           user.email,
           `Your Daily Task Summary — ${reminders.length} due tomorrow, ${overdue.length} overdue`,
-          dailyDigestTemplate(user.name, reminders, overdue, dashboardLink)
+          dailyTaskSummaryTemplate(user.name, reminders, overdue, dashboardLink)
         );
         console.log(`Daily digest sent to ${user.email}`);
       } catch (err) {
