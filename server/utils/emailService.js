@@ -2,7 +2,7 @@
 const Brevo = require("@getbrevo/brevo");
 require("dotenv").config();
 
-const { welcomeEmailTemplate } = require("../template/welcomeMail");
+const { welcomeEmailTemplate } = require("../utils/emailTemplates.js");
 
 // Initialize Brevo Transactional Email API
 const apiInstance = new Brevo.TransactionalEmailsApi();
@@ -39,9 +39,9 @@ const sendEmail = async (to, subject, htmlContent) => {
 
 const sendWelcomeEmail = async (to, name) => {
   try {
-    await sendEmail(to, "🎉 Welcome to ForTask!", welcomeEmailTemplate(name));
+    await sendEmail(to, "Welcome to ForTask!", welcomeEmailTemplate(name));
   } catch (err) {
-    console.error("❌ Failed to send welcome email:", err);
+    console.error("Failed to send welcome email:", err);
   }
 };
 
