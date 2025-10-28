@@ -80,3 +80,11 @@ npm install
 
 npm run dev
 
+## Screenshots
+
+**Login Page** ![alt text](</Sreenshots/Login Page.jpeg>)
+**Signup Page:** ![alt text](</Sreenshots/Signup Page.jpeg>)
+**Dashboard** ![alt text](/Sreenshots/Dashboard.jpeg)
+**Profile Page** ![alt text](</Sreenshots/Profile Page.jpeg>)
+**Create Task Page** ![alt text](</Sreenshots/Create Task Page.jpeg>)
+**Dashboard after create task** ![alt text](</Sreenshots/Dashboard after create task.jpeg>)
