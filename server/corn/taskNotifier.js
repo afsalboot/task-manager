@@ -33,7 +33,8 @@ const checkTasks = async () => {
 
     // Send one email per user
     for (const [, { user, reminders, overdue }] of userTaskMap) {
-      const dashboardLink = process.env.CLIENT_URL || "https://fortask.netlify.app";
+      const dashboardLink =
+        process.env.CLIENT_URL || "https://fortask.netlify.app";
 
       try {
         await sendEmail(
@@ -43,7 +44,10 @@ const checkTasks = async () => {
         );
         console.log(`Daily digest sent to ${user.email}`);
       } catch (err) {
-        console.warn(`Failed to send daily digest to ${user.email}:`, err.message);
+        console.warn(
+          `Failed to send daily digest to ${user.email}:`,
+          err.message
+        );
       }
     }
 
@@ -53,7 +57,7 @@ const checkTasks = async () => {
   }
 };
 
-// 🕘 Run every day at 9 AM India time
+// Run every day at 9 AM India time
 cron.schedule(
   "0 7,8 * * *",
   () => {

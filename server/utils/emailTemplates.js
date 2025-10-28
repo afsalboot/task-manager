@@ -24,7 +24,7 @@ const baseEmailWrapper = (title, color, body) => `
 </html>
 `;
 
-// 📨 Welcome Email
+// Welcome Email
 exports.welcomeEmailTemplate = (name) =>
   baseEmailWrapper(
     "Welcome to ForTask",
@@ -43,7 +43,7 @@ exports.welcomeEmailTemplate = (name) =>
          Go to Dashboard
       </a>
       <p style="margin-top: 24px;">If you ever need help, just reply to this email — we’re here for you!</p>
-      <p>Let’s make productivity simple.<br>– The ForTask Team 🚀</p>
+      <p>Let’s make productivity simple.<br>– The ForTask Team</p>
     `
   );
 
