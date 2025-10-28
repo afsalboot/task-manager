@@ -47,7 +47,7 @@ A full-stack **Task Management Platform** built using the **MERN stack (MongoDB,
     - Frontend : Netlify
     - Backend : Render
 
-## Installation & Setup Guide
+### Installation & Setup Guide
 
 git clone https://github.com/afsalboot/task-manager.git
 
@@ -80,11 +80,22 @@ npm install
 
 npm run dev
 
-## Screenshots
+### Screenshots
 
-**Login Page** ![alt text](</Sreenshots/Login Page.jpeg>)
-**Signup Page:** ![alt text](</Sreenshots/Signup Page.jpeg>)
-**Dashboard** ![alt text](/Sreenshots/Dashboard.jpeg)
-**Profile Page** ![alt text](</Sreenshots/Profile Page.jpeg>)
-**Create Task Page** ![alt text](</Sreenshots/Create Task Page.jpeg>)
-**Dashboard after create task** ![alt text](</Sreenshots/Dashboard after create task.jpeg>)
+**Login Page:** 
+![alt text](</Sreenshots/Login Page.jpeg>)
+
+**Signup Page:** 
+![alt text](</Sreenshots/Signup Page.jpeg>)
+
+**Dashboard:** 
+![alt text](/Sreenshots/Dashboard.jpeg)
+
+**Profile Page:** 
+![alt text](</Sreenshots/Profile Page.jpeg>)
+
+**Create Task Page:** 
+![alt text](</Sreenshots/Create Task Page.jpeg>)
+
+**Dashboard after create task:** 
+![alt text](</Sreenshots/Dashboard after create task.jpeg>)
