@@ -55,7 +55,7 @@ const checkTasks = async () => {
 
 // 🕘 Run every day at 9 AM India time
 cron.schedule(
-  "0 9 * * *",
+  "0 7,8 * * *",
   () => {
     console.log("Running daily digest job...");
     checkTasks();
